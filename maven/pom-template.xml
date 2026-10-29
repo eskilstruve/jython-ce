@@ -5,18 +5,19 @@
         https://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.python</groupId>
+    <groupId>io.github.eskilstruve</groupId>
     <artifactId>@ARTIFACT-ID@</artifactId>
     <packaging>jar</packaging>
     <version>@PROJECT-VERSION@</version>
 
-    <name>Jython</name>
+    <name>Jython-ce</name>
     <description>
-        Jython is an implementation of the high-level, dynamic, object-oriented
+        Jython-ce (Jython community edition) is a community-maintained fork of
+        Jython, an implementation of the high-level, dynamic, object-oriented
         language Python written in 100% Pure Java, and seamlessly integrated with
         the Java platform. It thus allows you to run Python on any Java platform.
     </description>
-    <url>https://www.jython.org/</url>
+    <url>https://github.com/eskilstruve/jython-ce</url>
     <inceptionYear>1997</inceptionYear>
 
     <organization>
@@ -27,39 +28,28 @@
     <licenses>
         <license>
             <name>Jython Software License</name>
-            <url>https://raw.githubusercontent.com/jython/jython/v@PROJECT-VERSION@/LICENSE.txt</url>
+            <url>https://raw.githubusercontent.com/eskilstruve/jython-ce/master/LICENSE.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <id>jython</id>
-            <name>Jython Developers</name>
-            <email>jython-dev@lists.sourceforge.net</email>
+            <id>eskilstruve</id>
+            <name>Jython-ce Developers</name>
+            <url>https://github.com/eskilstruve</url>
         </developer>
     </developers>
 
-    <mailingLists>
-        <mailingList>
-            <name>Jython Users</name>
-            <post>jython-users@lists.sourceforge.net</post>
-        </mailingList>
-        <mailingList>
-            <name>Jython Developers</name>
-            <post>jython-dev@lists.sourceforge.net</post>
-        </mailingList>
-    </mailingLists>
-
     <scm>
-        <connection>scm:git:https://github.com/jython/jython.git</connection>
-        <developerConnection>scm:git:git@github.com:jython/jython.git</developerConnection>
-        <url>https://github.com/jython/jython</url>
+        <connection>scm:git:https://github.com/eskilstruve/jython-ce.git</connection>
+        <developerConnection>scm:git:git@github.com:eskilstruve/jython-ce.git</developerConnection>
+        <url>https://github.com/eskilstruve/jython-ce</url>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/jython/jython/issues</url>
+        <url>https://github.com/eskilstruve/jython-ce/issues</url>
     </issueManagement>
 
 </project>

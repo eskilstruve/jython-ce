@@ -533,7 +533,8 @@ public class jython {
         // Choose the basic action
         switch (opts.action) {
             case VERSION:
-                System.err.printf("Jython %s\n", Version.PY_VERSION);
+                System.err.printf("Jython-ce %s (Python %s)\n", Version.CE_VERSION,
+                        Version.PY_VERSION);
                 exit(Status.OK);
             case HELP:
                 exit(usage(Status.OK));

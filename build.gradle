@@ -42,19 +42,26 @@ import java.text.SimpleDateFormat
  * changeset is not tagged correspondingly, the build will add "-SNAPSHOT" to
  * the effective version.
  */
-// Versions are specified in this grammar:
+// Jython-ce has two versions. The project version is the Jython-ce release
+// (semantic versioning, tagged v<version> in Git). It names the JARs and the
+// Maven publication. The Python version is the level of Python (and upstream
+// Jython) implemented, and is what sys.version and sys.version_info report.
+
+version = '1.0.0'
+
+// Python versions are specified in this grammar:
 // <major> . <minor> ( . <micro> )? ( <release> <serial> )? ( - <word> )?
 
-version = '2.7.5b2'
+ext.pythonVersion = '2.7.5b2'
 
 // Valid examples (please preserve in comments):
-//version = '2.7.2a2'
-//version = '2.7.2b2-DEV'
-//version = '2.7.2b1'
-//version = '2.7.2rc1'
-//version = '2.7.2'
+//ext.pythonVersion = '2.7.2a2'
+//ext.pythonVersion = '2.7.2b2-DEV'
+//ext.pythonVersion = '2.7.2b1'
+//ext.pythonVersion = '2.7.2rc1'
+//ext.pythonVersion = '2.7.2'
 
-group = 'org.python'
+group = 'io.github.eskilstruve'
 
 
 // ---------------- Miscellaneous configuration --------------------------------
@@ -376,10 +383,10 @@ task generateVersionInfo(
          */
         // <major>.<minor>(.<micro>)(<release><serial>)?(+|-<snapshot>)?
         def versionRegex = /(\d+)\.(\d+)(\.(\d+))?((a|b|rc)(\d+))?(\+|-(\w+))?/
-        def versionMatcher = project.version =~ versionRegex
+        def versionMatcher = project.ext.pythonVersion =~ versionRegex
         if (versionMatcher.count != 1) {
             throw new IllegalArgumentException(
-                    "Cannot parse project version string '${project.version}'")
+                    "Cannot parse Python version string '${project.ext.pythonVersion}'")
         }
         // In principle it could match more than once: take the leftmost
         def versionResult = versionMatcher[0]
@@ -419,7 +426,7 @@ task generateVersionInfo(
 
         if (snapshotSuffix == null) {
             // The version is named correctly for a release. Make safety checks on the repo.
-            String expectTag = "tags/v$release"
+            String expectTag = "tags/v${project.version}"
             String message = null;
             if (tag.endsWith('-dirty')) {
                 message = 'Version-controlled files have been edited since the last commit'
@@ -444,10 +451,12 @@ task generateVersionInfo(
         }
 
         // Rebuild the version with the snapshot suffix, even if not given originally.
-        project.version = release + snapshotSuffix
-        println "This build is for v${project.version}."
+        String ceVersion = project.version
+        project.version = ceVersion + snapshotSuffix
+        println "This build is for Jython-ce v${project.version} (Python $release)."
 
-        property('jython.version', project.version)
+        property('jython.ce.version', project.version)
+        property('jython.version', release + snapshotSuffix)
         property('jython.major_version', major)
         property('jython.minor_version', minor)
         property('jython.micro_version', micro)
@@ -791,12 +800,13 @@ publishing {
 
             pom {
                 // Same description as in ~/maven/pom-template
-                name = 'Jython'
+                name = 'Jython-ce'
                 description =
-                    'Jython is an implementation of the high-level, dynamic, object-oriented\n' +
+                    'Jython-ce (Jython community edition) is a community-maintained fork of\n' +
+                    'Jython, an implementation of the high-level, dynamic, object-oriented\n' +
                     'language Python written in 100% Pure Java, and seamlessly integrated with\n' +
                     'the Java platform. It thus allows you to run Python on any Java platform.'
-                url = 'https://www.jython.org/'
+                url = 'https://github.com/eskilstruve/jython-ce'
                 inceptionYear = '1997'
 
                 organization {
@@ -808,8 +818,7 @@ publishing {
                 licenses {
                     license {
                         name = 'Jython Software License'
-                        // Link to a stable version (defined by release tag in repo).
-                        url = 'https://raw.githubusercontent.com/jython/jython/v' + project.version + '/LICENSE.txt'
+                        url = 'https://raw.githubusercontent.com/eskilstruve/jython-ce/master/LICENSE.txt'
                         distribution = 'repo'
                     }
                 }
@@ -817,33 +826,22 @@ publishing {
                 // Could list us all, but why not just the list for now?
                 developers {
                     developer {
-                        id = 'jython'
-                        name = 'Jython Developers'
-                        email = 'jython-dev@lists.sourceforge.net'
-                    }
-                }
-
-                mailingLists {
-                    mailingList {
-                        name = 'Jython Users'
-                        post = 'jython-users@lists.sourceforge.net'
-                    }
-                    mailingList {
-                        name = 'Jython Developers'
-                        post = 'jython-dev@lists.sourceforge.net'
+                        id = 'eskilstruve'
+                        name = 'Jython-ce Developers'
+                        url = 'https://github.com/eskilstruve'
                     }
                 }
 
                 // Point to Git repositories hosted on GitHub.
                 scm {
-                    connection = 'scm:git:https://github.com/jython/jython.git'
-                    developerConnection = 'scm:git:git@github.com:jython/jython.git'
-                    url = 'https://github.com/jython/jython'
+                    connection = 'scm:git:https://github.com/eskilstruve/jython-ce.git'
+                    developerConnection = 'scm:git:git@github.com:eskilstruve/jython-ce.git'
+                    url = 'https://github.com/eskilstruve/jython-ce'
                 }
 
                 issueManagement {
                     system = 'GitHub'
-                    url = 'https://github.com/jython/jython/issues'
+                    url = 'https://github.com/eskilstruve/jython-ce/issues'
                 }
             }
         }

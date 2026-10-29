@@ -51,7 +51,7 @@ public class Issue1972 {
     static String[] STDOUT_IGNORE = {"Listening for transport dt_socket"};
 
     /** Lines in stderr (as regular expressions) to ignore when checking subprocess output. */
-    static String[] STDERR_IGNORE = {"Jython 2", "\\*sys-package-mgr"};
+    static String[] STDERR_IGNORE = {"Jython(-ce)? \\d","\\*sys-package-mgr"};
 
     /**
      * Extra JVM options used when debugging is enabled. <code>DEBUG_PORT</code> will be substituted

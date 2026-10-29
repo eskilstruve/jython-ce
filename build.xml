@@ -94,6 +94,11 @@ informix.jar = ../support/jdbc-4.10.12.jar
         <property name="jython.java.version" value="1.8" />
         <property name="jdk.source.version" value="1.8" />
 
+        <!-- The Jython-ce release (semantic versioning). This names the artefacts and must match
+             the Git tag v${jython.ce.version} for a release build. The Python version below is
+             separate: it is what sys.version and sys.version_info report. -->
+        <property name="jython.ce.version" value="1.0.0"/>
+
         <!-- Designate the official release encoded in parts. In normal times, this is the *next*
              official release, e.g. 2.7.2b2 while working towards 2.7.2b2, and sys.version will be
              "2.7.2b2-DEV". To build that release, work in a clean checkout of the corresponding
@@ -468,7 +473,7 @@ informix.jar = ../support/jdbc-4.10.12.jar
             <not><isset property="build.git.is_clean"/></not>
         </condition>
         <condition property="diagnosis"
-                   value="Change set ${build.git.version} is not tagged 'v${jython.release}'">
+                   value="Change set ${build.git.version} is not tagged 'v${jython.ce.version}'">
             <not><isset property="build.git.is_tagged"/></not>
         </condition>
 
@@ -486,7 +491,7 @@ informix.jar = ../support/jdbc-4.10.12.jar
         <local name="message" />
         <condition property="message"
                    value="${diagnosis} - build is a snapshot."
-                   else ="Build is for release of ${jython.release}.">
+                   else ="Build is for release of Jython-ce ${jython.ce.version} (Python ${jython.release}).">
             <isset property="diagnosis"/>
         </condition>
         <echo>
@@ -530,7 +535,7 @@ ${build.git.status}
         <condition property="build.git.is_tagged">
             <and>
                 <istrue value="${git.present}" />
-                <equals arg1="${build.git.tag}" arg2="tags/v${jython.release}" />
+                <equals arg1="${build.git.tag}" arg2="tags/v${jython.ce.version}" />
             </and>
         </condition>
     </target>
@@ -614,6 +619,7 @@ ${build.git.status}
         <!-- These values are guaranteed by the dependencies, even if git is not installad or there
              is no repo.-->
         <echo>Writing git and build metadata to version.properties.</echo>
+        <echo>jython.ce.version     = ${jython.ce.version}${snapshot.suffix}</echo>
         <echo>jython.version        = ${jython.version}</echo>
         <echo>build.git.branch      = ${build.git.branch}</echo>
         <echo>build.git.version     = ${build.git.version}</echo>
@@ -625,6 +631,7 @@ ${build.git.status}
         </tstamp>
         <mkdir dir="${compile.dir}/org/python"/>
         <echo file="${compile.dir}/org/python/version.properties"># Jython version information
+jython.ce.version=${jython.ce.version}${snapshot.suffix}
 jython.version=${jython.version}
 jython.major_version=${jython.major_version}
 jython.minor_version=${jython.minor_version}

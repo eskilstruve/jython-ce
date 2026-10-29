@@ -1,4 +1,4 @@
-Jython NEWS
+Jython-ce NEWS
 
 
 The features new in a given version are listed at the head of the section for
@@ -9,6 +9,33 @@ For more details, three sources are available according to type:
  - [ n ], please see old bug tracker at https://bugs.jython.org.
  - [ GH-n ], please see https://github.com/jython/jython.
  - [ FM-n ], please see https://github.com/jython/frozen-mirror.
+
+==============================================================================
+Jython-ce 1.0.0 (Python 2.7.5b2)
+==============================================================================
+
+First release of Jython-ce (Jython community edition), a community-maintained
+fork of Jython 2.7.5b2 at https://github.com/eskilstruve/jython-ce.
+
+Jython-ce releases are numbered independently (semantic versioning, tagged
+v<version>). The Python version reported by sys.version and sys.version_info
+is unchanged (2.7.5b2).
+
+New Features
+
+    - Rebranded as Jython-ce. The interactive banner and "jython --version"
+      show the Jython-ce release alongside the Python version.
+
+    - Maven/Gradle artifacts are published under the group ID
+      io.github.eskilstruve (upstream Jython uses org.python). Artifact names
+      (jython, jython-standalone, jython-slim, jython-installer) are unchanged.
+
+    - org.python.Version.CE_VERSION gives the Jython-ce release.
+
+Compatibility
+
+    - Java packages (org.python.*), the jython launcher, sys.platform and
+      platform.python_implementation() are unchanged from upstream Jython.
 
 ==============================================================================
 Jython 2.7.5

@@ -1,6 +1,7 @@
 // Copyright (c) Corporation for National Research Initiatives
 package org.python.util;
 
+import org.python.Version;
 import org.python.core.Py;
 import org.python.core.PyBuiltinFunctionSet;
 import org.python.core.PyException;
@@ -102,13 +103,13 @@ public class InteractiveConsole extends InteractiveInterpreter {
 
     /**
      * Returns the banner to print before the first interaction:
-     * "{@code Jython <version> on <platform>}".
+     * "{@code Jython-ce <ce-version>, Python <version> on <platform>}".
      *
      * @return the banner.
      */
     public static String getDefaultBanner() {
-        return String.format("Jython %s on %s", PySystemState.version,
-                Py.getSystemState().platform);
+        return String.format("Jython-ce %s, Python %s on %s", Version.CE_VERSION,
+                PySystemState.version, Py.getSystemState().platform);
     }
 
     /**

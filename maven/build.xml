@@ -36,7 +36,7 @@
     <property name="pubs.dir" value="${basedir}/publications" />
 
     <property name="m2.repo" value="${user.home}/.m2/repository" />
-    <property name="m2.groupDir" value="org/python" />
+    <property name="m2.groupDir" value="io/github/eskilstruve" />
 
     <property name="gradle.base" value="${basedir}/build2" />
     <property name="gradle.repo" value="${gradle.base}/stagingRepo" />
@@ -63,27 +63,27 @@
     </target>
 
     <target name="install" depends="prepare">
-        <m2-install artifactId="jython" version="${jython.version}" />
+        <m2-install artifactId="jython" version="${jython.ce.version}" />
     </target>
 
     <target name="install-standalone" depends="prepare">
-        <m2-install artifactId="jython-standalone" version="${jython.version}" />
+        <m2-install artifactId="jython-standalone" version="${jython.ce.version}" />
     </target>
 
     <target name="bundle" depends="prepare">
-        <m2-bundle artifactId="jython" version="${jython.version}" />
+        <m2-bundle artifactId="jython" version="${jython.ce.version}" />
     </target>
 
     <target name="bundle-standalone" depends="prepare">
-        <m2-bundle artifactId="jython-standalone" version="${jython.version}" />
+        <m2-bundle artifactId="jython-standalone" version="${jython.ce.version}" />
     </target>
 
     <target name="bundle-installer" depends="prepare">
-        <m2-bundle artifactId="jython-installer" version="${jython.version}" />
+        <m2-bundle artifactId="jython-installer" version="${jython.ce.version}" />
     </target>
 
     <target name="bundle-slim" depends="prepare" if="gradle.published">
-        <m2-bundle-gradle artifactId="jython-slim" version="${jython.version}" />
+        <m2-bundle-gradle artifactId="jython-slim" version="${jython.ce.version}" />
     </target>
 
     <target name="install-all" depends="install, install-standalone" />
@@ -286,7 +286,7 @@
 
     <target name="prepare" depends="build-jython, validate-template-pom, version">
         <local name="artifacts" />
-        <property name="artifacts" value="${gradle.repo}/${m2.groupDir}/jython-slim/${jython.version}" />
+        <property name="artifacts" value="${gradle.repo}/${m2.groupDir}/jython-slim/${jython.ce.version}" />
         <condition property="gradle.published">
             <available file="${artifacts}" type="dir" />
         </condition>

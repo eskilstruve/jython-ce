@@ -20,6 +20,9 @@ import org.python.core.CodeFlag;
  */
 public class Version {
 
+    /** The current release of Jython-ce, e.g. "1.0.0" (independent of the Python version). */
+    public static String CE_VERSION;
+
     /** The current version of Jython. */
     public static String PY_VERSION;
 
@@ -64,6 +67,7 @@ public class Version {
                 properties.load(in);
                 loaded = true;
                 PY_VERSION = properties.getProperty("jython.version");
+                CE_VERSION = properties.getProperty("jython.ce.version", "unknown");
                 PY_MAJOR_VERSION = Integer.valueOf(properties.getProperty("jython.major_version"));
                 PY_MINOR_VERSION = Integer.valueOf(properties.getProperty("jython.minor_version"));
                 PY_MICRO_VERSION = Integer.valueOf(properties.getProperty("jython.micro_version"));

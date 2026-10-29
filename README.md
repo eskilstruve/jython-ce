@@ -1,12 +1,17 @@
-# Jython: Python for the Java Platform
-[![Maven Central](https://maven-badges.sml.io/maven-central/org.python/jython-standalone/badge.svg)](https://search.maven.org/artifact/org.python/jython-standalone/)
-[![Javadocs](https://www.javadoc.io/badge/org.python/jython-standalone.svg)](https://www.javadoc.io/doc/org.python/jython-standalone)
-[![APIdia](https://apidia.net/java/Jython/badge.svg)](https://apidia.net/java/Jython)
+# Jython-ce: Python for the Java Platform (Community Edition)
 
-This is the development repository of Jython,
+Jython-ce (Jython community edition) is a community-maintained fork of
+[Jython](https://github.com/jython/jython),
 the implementation of Python in Java.
-Only version 2.7 of Python can be supported at present
-(but watch this space for a 3.x version).
+It tracks upstream Jython 2.7 and aims to keep it running well
+on current releases of Java.
+Only version 2.7 of Python can be supported at present.
+
+Jython-ce remains compatible with upstream Jython:
+the Java packages are still `org.python.*`,
+the launcher is still `jython`,
+and `platform.python_implementation()` still reports `'Jython'`,
+so existing applications and libraries work unchanged.
 
 ## Compatibility
 
@@ -42,23 +47,27 @@ pull requests, documentation changes and e-mail discussions.
 
 ## Downloads
 
-Binary downloads are available from https://www.jython.org/download
-along with Maven and Gradle dependency information.
+Jython-ce releases are published on the
+[GitHub releases page](https://github.com/eskilstruve/jython-ce/releases).
+Maven and Gradle artifacts use the group ID `io.github.eskilstruve`
+(upstream Jython uses `org.python`).
 
-## How to build Jython
+## How to build Jython-ce
 
 The project uses Git for version-control,
-and the master repository is at https://github.com/jython/jython,
+and the repository is at https://github.com/eskilstruve/jython-ce.
 You should clone this repository to create a buildable copy of the latest state
-of the Jython source.
+of the Jython-ce source:
+```
+git clone https://github.com/eskilstruve/jython-ce.git
+```
 Start a new branch for any bug-fix or experimentation you plan.
 
-The previously authoritative repository at https://hg.python.org/jython is not now in use,
-remaining frozen at v2.7.2.
+Upstream Jython is developed at https://github.com/jython/jython.
 
 ### Build using `ant` for development
 
-Jython is normally built using `ant`.
+Jython-ce is normally built using `ant`.
 It is necessary to have Ant and at least a Java 8 SDK on the path.
 To build Jython in development, we generally use the command:
 ```
@@ -80,7 +89,7 @@ or by invoking the Ant target `regrtest`.
 
 ### Build an installer using `ant`
 
-If you want to install a snapshot build of Jython, use the command:
+If you want to install a snapshot build of Jython-ce, use the command:
 ```
 ant installer
 ```
@@ -98,7 +107,7 @@ For the console version. (A `--help` option gives you the full story.)
 ### Build a JAR using Gradle
 
 We have a Gradle build that results in a family of JARs and a POM.
-This is intended to provide the Jython core in a form that Gradle and Maven
+This is intended to provide the Jython-ce core in a form that Gradle and Maven
 users can consume as a dependency.
 Invoke this with:
 ```
