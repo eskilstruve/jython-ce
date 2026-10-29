@@ -28,6 +28,13 @@ New Features
     - Continuous integration tests Java 21 and 26 as well as 17 and 25, and
       a new workflow builds the Gradle JAR on Java 17 and 26.
 
+Bugs fixed
+
+    - "jython -V" and "jython --version" print "Jython <python-version>
+      (Jython-ce <version>)" again, e.g. "Jython 2.7.5b2 (Jython-ce 1.0.1)".
+      In 1.0.0 the output started "Jython-ce", which broke tools that
+      identify the interpreter by the "Jython 2.7" prefix.
+
 ==============================================================================
 Jython-ce 1.0.0 (Python 2.7.5b2)
 ==============================================================================
