@@ -97,7 +97,7 @@ informix.jar = ../support/jdbc-4.10.12.jar
         <!-- The Jython-ce release (semantic versioning). This names the artefacts and must match
              the Git tag v${jython.ce.version} for a release build. The Python version below is
              separate: it is what sys.version and sys.version_info report. -->
-        <property name="jython.ce.version" value="1.0.0"/>
+        <property name="jython.ce.version" value="1.0.1"/>
 
         <!-- Designate the official release encoded in parts. In normal times, this is the *next*
              official release, e.g. 2.7.2b2 while working towards 2.7.2b2, and sys.version will be

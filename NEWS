@@ -11,6 +11,24 @@ For more details, three sources are available according to type:
  - [ FM-n ], please see https://github.com/jython/frozen-mirror.
 
 ==============================================================================
+Jython-ce 1.0.1 (Python 2.7.5b2)
+==============================================================================
+
+New Features
+
+    - Java 26 is supported, for building and running Jython-ce. The Ant build,
+      the interpreter and the Java unit tests all work on Java 26, and Java 8
+      remains the lowest supported version.
+
+    - The Gradle build uses Gradle 9.8.2 (was 7.4.2), which runs on Java 17 to
+      26. Gradle 7.4.2 could not run on recent Java. The JARs it produces
+      still target Java 8. The build script is migrated from APIs that
+      Gradle 9 removed, and generates the ANTLR parser before compiling.
+
+    - Continuous integration tests Java 21 and 26 as well as 17 and 25, and
+      a new workflow builds the Gradle JAR on Java 17 and 26.
+
+==============================================================================
 Jython-ce 1.0.0 (Python 2.7.5b2)
 ==============================================================================
 

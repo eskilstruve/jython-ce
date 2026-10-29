@@ -1,0 +1,39 @@
+# Build the Gradle JAR of Jython on recent Java versions (GitHub action)
+
+name: gradle build 2.7
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+jobs:
+
+  gradle-build:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        # Gradle 9 needs Java 17 or later to run. The JAR still targets Java 8.
+        java: [17, 26]
+      fail-fast: false
+
+    steps:
+    - run: echo "Branch ${{ github.ref }} of repository ${{ github.repository }}."
+
+    - uses: actions/checkout@v6
+
+    - name: Set up JDK ${{ matrix.java }}
+      uses: actions/setup-java@v5
+      with:
+        java-version: ${{ matrix.java }}
+        distribution: 'temurin'
+
+    - name: Build with Gradle on ${{ matrix.os }}
+      run: ./gradlew --no-daemon build -x test

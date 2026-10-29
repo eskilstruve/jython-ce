@@ -69,6 +69,7 @@ Upstream Jython is developed at https://github.com/jython/jython.
 
 Jython-ce is normally built using `ant`.
 It is necessary to have Ant and at least a Java 8 SDK on the path.
+Jython-ce supports Java 8 through Java 26.
 To build Jython in development, we generally use the command:
 ```
 ant
@@ -107,13 +108,15 @@ For the console version. (A `--help` option gives you the full story.)
 ### Build a JAR using Gradle
 
 We have a Gradle build that results in a family of JARs and a POM.
+It uses Gradle 9 (through the wrapper), which needs Java 17 or later to run,
+although the JARs it produces still run on Java 8.
 This is intended to provide the Jython-ce core in a form that Gradle and Maven
 users can consume as a dependency.
 Invoke this with:
 ```
 PS> .\gradlew publish
 ```
-and a JAR and POM are delivered to ` .build2\repo` 
+and a JAR and POM are delivered to `build2\stagingRepo`.
 
 Whereas the JARs delivered by the installer are somewhat "fat",
 embedding certain dependencies in shaded (renamed) form,
